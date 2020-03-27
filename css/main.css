@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  color: #111111;
+  margin: 0; }
+
+header, footer, main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif; }
+
+section {
+  padding: 1%; }
+
+footer {
+  bottom: 0;
+  width: 100vw;
+  color: black;
+  background: rgba(255, 255, 255, 0.98); }
+  footer .links-wrapper a {
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    align-items: center;
+    text-decoration: none;
+    color: black; }
+    footer .links-wrapper a:hover > p {
+      color: rgba(12, 12, 12, 0.8); }
+    footer .links-wrapper a * {
+      margin: 0 8px; }
+
+.lyrics {
+  padding: 5%;
+  width: 100vw;
+  height: 100%;
+  min-height: 60vh;
+  margin: 7% auto; }
+
+.lyrics-text {
+  font-size: 25px;
+  line-height: 1.85em;
+  color: #111111; }
+
+input {
+  border: 1px solid black; }
+
+button {
+  background: green;
+  border-radius: 20px;
+  color: white; }
+
+.keyword {
+  display: inline-block;
+  position: relative;
+  cursor: pointer; }
+  .keyword img {
+    max-width: 250px;
+    max-height: 250px;
+    display: none;
+    position: absolute;
+    z-index: 1; }
+  .keyword p {
+    margin: 0;
+    padding: 0;
+    color: orange; }
+    .keyword p:hover {
+      color: blue; }
+      .keyword p:hover ~ img {
+        display: inline-block; }
+
+/*# sourceMappingURL=main.css.map */
