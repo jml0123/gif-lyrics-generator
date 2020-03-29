@@ -17,16 +17,22 @@
             <div class="search-container">
                 <form class="search-box">
                     <label for="lyric-search">Type a song and artist to get started</label>
-                    <input type="text" placeholder="The Box" id="track-search">
-                    <input type="text" placeholder="Roddy Rich" id="artist-search">
+                    <div class="search-inputs">
+                        <input type="text" placeholder="The Box" id="track-search">
+                        <input type="text" placeholder="Roddy Rich" id="artist-search">
+                    </div>
                     <button type="submit">Generate Gif Lyrics</button>
                 </form>
             </div>
         </section>
         <section role="application">
+            <div class="view-switch"><p>Grid</p><p>Lyrics</p><div class="circle"></div></div>
             <div class="lyrics">
                 <div class="render-container">
                     <!-- Render Lyrics Here-->
+                    <div class="lyrics-text">
+                    </div>
+              
                 </div>
             </div>
         </section>
