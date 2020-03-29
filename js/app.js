@@ -25,10 +25,13 @@ const searchTrack = async (songName, artist) => {
         songName.replace(/\s/g, '%20');
         (artist)? artist.replace(/\s/g, '%20') : null;
         let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
-        const search_data = await response.json();
-        //console.log(search_data)
         
+        //let response = await fetch(`https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
+        const search_data = await response.json();
+        console.log(search_data)
         const lyrics_raw = await search_data.message.body.lyrics.lyrics_body;
+        
+        
         const lyrics_clean = lyrics_raw.substring(0, lyrics_raw.indexOf("*"));
         console.log(lyrics_clean)
         return lyrics_clean;
@@ -42,6 +45,38 @@ const searchTrack = async (songName, artist) => {
     }
 }
 
+const matchTrack = async (songName, artist) => {
+       /* Render artist, song and album on top */ 
+       try {
+          
+            let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.track.get?q_artist=${artist}&q_track=${songName}&apikey=${MUSIX_KEY}`)
+            const track_match = await response.json();
+            const track_name = track_match.message.body.track.track_name;
+            const artist_name = track_match.message.body.track.artist_name;
+            const album_name = track_match.message.body.track.album_name;
+
+            let track_info = {
+                track: track_name,
+                artist: artist_name,
+                album: album_name
+            }
+           
+            renderTrackInfo(track_info)
+       }
+       catch(err){
+            console.error(err, "could not find match");
+       }
+}
+
+
+const renderTrackInfo = (track_obj) =>{
+    document.querySelector(".track-info").innerHTML = `
+        <div class="info-container">
+            <h1 class="track-name">${track_obj.track}</h1>
+            <p class="artist-name">${track_obj.artist}</p>
+        </div>
+    `
+}
 
 const parseLyrics = (lyrics_data) => {
     const punctuation = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
@@ -217,6 +252,7 @@ const handleFormSubmit = () => {
         const track = document.querySelector("#track-search").value;
         const artist = document.querySelector("#artist-search").value;
         handleTrack(track, artist)
+        matchTrack(track, artist)
       })
   }
 

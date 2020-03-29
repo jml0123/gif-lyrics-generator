@@ -109,6 +109,22 @@ footer {
   align-items: center;
   justify-content: center; }
 
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4%; }
+  .info-container h1, .info-container p {
+    margin: 0 auto;
+    padding: 0; }
+
+.track-name {
+  font-size: 25px; }
+
+.artist-name {
+  font-size: 20px;
+  color: #707070; }
+
 input {
   border: 1px solid black;
   min-height: 25px;

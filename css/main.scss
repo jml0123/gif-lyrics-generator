@@ -145,6 +145,26 @@ footer {
     }
 }
 
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4%;
+    h1, p{
+        margin: 0 auto;
+        padding: 0;
+    }
+}
+
+.track-name {
+    font-size: $lyricsFontSize;
+    
+}
+
+.artist-name {
+    font-size: $searchFontSize;
+    color: #707070
+}
 
 input {
     border: 1px solid black;
