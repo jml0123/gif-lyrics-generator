@@ -24,7 +24,7 @@ const searchTrack = async (songName, artist) => {
     try {
         songName.replace(/\s/g, '%20');
         (artist)? artist.replace(/\s/g, '%20') : null;
-        let response = await fetch(`http://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
+        let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
         const search_data = await response.json();
         //console.log(search_data)
         

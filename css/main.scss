@@ -149,6 +149,8 @@ footer {
 input {
     border: 1px solid black;
     min-height: 25px;
+    min-width: 225px;
+    max-width: 225px;
     padding: 1%;
     font-size: $searchFontSize;
     color: $highlightColor;
