@@ -34,7 +34,11 @@ section {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: white; }
+    color: white;
+    transition: 155ms ease-in; }
+    .dev-info .links-wrapper a:hover {
+      background: white;
+      color: black; }
     .dev-info .links-wrapper a * {
       margin: 0 8px; }
 

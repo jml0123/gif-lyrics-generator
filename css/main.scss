@@ -56,7 +56,11 @@ section {
         justify-content: center;
         text-decoration: none;
         color: white;
-  
+        transition: 155ms ease-in;
+        &:hover {
+            background: white;
+            color: black;
+        }
         * {
             margin: 0 8px;
         }
