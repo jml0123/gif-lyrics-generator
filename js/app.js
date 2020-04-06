@@ -322,6 +322,35 @@ const assignTheme = async (themes) => {
     CURRENT_THEME = theme;
 }
 
+const showConsole = () => { 
+    document.querySelector(".console").addEventListener("mouseover", () => {
+        document.querySelector(".console").style.transform = "translateX(0px)" 
+        document.querySelector(".console").style.opacity = "1" 
+    })
+    document.querySelector(".hover-div").addEventListener("mouseover", () => {
+        document.querySelector(".console").style.transform = "translateX(0px)" 
+        document.querySelector(".console").style.opacity = "1" 
+    })
+}
+
+
+
+const hideConsole = () => { 
+    document.querySelector(".console").style.transform = "translateX(-420px)" 
+    document.querySelector(".console").style.opacity = "0" 
+
+    document.querySelector(".console").addEventListener("mouseout", () => {
+        document.querySelector(".console").style.transform = "translateX(-420px)" 
+        document.querySelector(".console").style.opacity = "0" 
+    })
+
+    document.querySelector(".hover-div").addEventListener("mouseout", () => {
+        document.querySelector(".console").style.transform = "translateX(-420px)" 
+        document.querySelector(".console").style.opacity = "0" 
+    })
+}
+
+
 /* FORM METHODS */ 
 const handleFormSubmit = () => {
     document.querySelector("button[type='submit']")
@@ -339,6 +368,8 @@ const handleFormSubmit = () => {
 const main = () => {
     handleFormSubmit();
     handleViewSwitch();
+    showConsole();
+    setTimeout(hideConsole, 9200)
 }
 
 main();

@@ -29,7 +29,7 @@ main {
     align-items: center;
     justify-content: center;
     font-family: $Roboto;
-    background: #7fba2c;
+    background: #2c2cba;
     min-height: 100vh;
 }
 
@@ -143,12 +143,33 @@ section {
     background: rgba(255, 255, 255, 0.5);
     position: relative;
     margin: 12% 0;
+    //opacity: 0;
     border-radius: 20px;
     box-shadow: (2px 2px 20px rgba(11, 11, 11, 0.17));
+    transition: 450ms ease;
+    //transform: translateX(-420px);
+    &:hover {
+       // transform: translateX(0);
+       // opacity: 1;
+    }
     header, .search-container {
         padding: 0 17px;
     }
 
+}
+
+.hover-div {
+    position: absolute;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    height: 40vh;
+    width: 45vw;
+    //background: grey;
+    &:hover ~ .console {
+       // transform: translateX(0);
+       // opacity: 1;
+    }
 }
 
 .search {
@@ -178,7 +199,7 @@ section {
                 transition: background 133ms ease;
                 cursor: pointer;
                 &:hover {
-                    background: #d1eabb;
+                    background: #ababd3;
                     color: black;
                 }
             }
@@ -310,7 +331,7 @@ section {
 }
 
 @media (min-width: 768px)  {
-    #console {
+    #console-section {
         align-self: flex-start;
         justify-self: start;
         position: absolute;
