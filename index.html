@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gif Lyrics Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-    <header>
-        <div class="heading">
-            <h1>Gif Lyrics Generator</h1>
-        </div>
-    </header>
     <main>
-        <section>
+        <div class="dev-info">
+            <div class="links-wrapper">
+                <a href="https://github.com/jml0123" target="_blank">
+                <img height="20px" width="20px" src="https://cdn.iconscout.com/icon/free/png-256/github-153-675523.png" class="icon">
+                <p>Made by Miguel Lorenzo</p></a>
+            </div>
+        </div>
+        <section id="console">
+         <div class="console">
+            <header>
+                <h1>Gif Lyrics Generator</h1>
+            </header>
             <div class="search-container">
                 <form class="search-box">
                     <label for="lyric-search">Type a song and artist to get started</label>
@@ -21,9 +28,11 @@
                         <input type="text" placeholder="The Box" id="track-search">
                         <input type="text" placeholder="Roddy Rich" id="artist-search">
                     </div>
-                    <button type="submit">Generate Gif Lyrics</button>
+                    <button type="submit">Generate</button>
                 </form>
             </div>
+            
+        </div>
         </section>
         <section role="application">
             <div class="view-switch"><p>Grid</p><p>Lyrics</p><div class="circle"></div></div>
@@ -32,25 +41,22 @@
                     <!-- Render Track Info Here -->
                 </div>
                 <div class="render-container">
-                    <!-- Render Lyrics Here-->
-                    <div class="lyrics-text">
-                    </div>
-              
+                    <!-- Render Lyrics Here-->    
                 </div>
             </div>
         </section>
+       
     </main>
-    <footer>
+    <!--<footer>
         <div class="footer-container">
             <div class="links-wrapper">
-                    <!-- Github logo -->
                     <a href="https://github.com/jml0123" target="_blank">
                 <img height="27px" width="27px" src="https://cdn.iconscout.com/icon/free/png-256/github-153-675523.png" class="icon">
                 <p>Made by Miguel Lorenzo</p>
                     </a>
             </div>
         </div>
-    </footer>
+    </footer>-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://unpkg.com/compromise"></script>

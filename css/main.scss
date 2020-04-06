@@ -1,23 +1,36 @@
 $highlightColor: #f29d0c;
+$secondaryColor: orange;
 $hoverColor: blue;
 $searchFontSize: 20px;
-$lyricsFontSize: 25px;
+$lyricsFontSize: 31px;
+$lyricsFontSizeMobile: 27px;
 $gridFontSize: 42px;
+$Roboto: 'Roboto', sans-serif;
+$fadeDuration: 250ms ease;
+
+// lyrics text
+// highlight color
+// title
+// artist name
+// grid switch
 
 * {
     box-sizing: border-box;
 }
 body {
-    color: #111111;
+    background: #111111;
     margin: 0;
-    //background: #7f3f87;
+    transition: $fadeDuration;
 }
-header, footer, main {
+
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: sans-serif;
+    font-family: $Roboto;
+    background: #7fba2c;
+    min-height: 100vh;
 }
 
 section {
@@ -25,26 +38,34 @@ section {
 }
 
 
-footer {
-    //position: absolute;
-    bottom: 0;
-    width: 100vw;
-    color: black;
-    background: rgba(255, 255, 255, 0.98);
+
+.dev-info {
+    top: 0;
+    position: absolute;
+    color: white;
+    background: #111111;
     .links-wrapper  a{
+        font-size: 12px;
+        position: relative;
         display: flex;
+        text-align: center;
         flex-direction: row;
-        padding: 12px;
+        padding: 6px;
+        width: 100%;
         align-items: center;
+        justify-content: center;
         text-decoration: none;
-        color: black;
-        &:hover > p {
-            color: rgba(12, 12, 12, 0.8);
-        }
+        color: white;
+  
         * {
             margin: 0 8px;
         }
     }
+}
+.icon {
+    background: white;
+    border-radius: 100%;
+    padding: 1px;
 }
 
 .lyrics {
@@ -52,14 +73,20 @@ footer {
     width: 100vw;
     height: 100%;
     //border: 1px solid grey;
-    margin: 0 auto;
-
+    margin: 2.5% auto;
+    min-height: 100vh;
 }
 
 .lyrics-text{
-    font-size: $lyricsFontSize;
+    font-family: $Roboto;
+    font-size: $lyricsFontSizeMobile;
+    font-weight: 700;
     line-height: 1.85em;
-    color: #111111;
+    letter-spacing: 0.03em;
+    text-align: center;
+    margin: 0 auto;
+    transition: $fadeDuration;
+    cursor: default;
     &--error {
         color: maroon;
         text-align: center;
@@ -74,8 +101,10 @@ footer {
     justify-content: center;
     align-items: center;
     position: relative;
+    //right: 3%;
     font-size: 15px;
-    margin: 12px auto;
+    margin: 0 auto;
+
     cursor: pointer;
     p {
         margin: 0 10px;
@@ -109,50 +138,102 @@ footer {
     align-items: center;
 
 }
+.console {
+    padding: 3.66px;
+    background: rgba(255, 255, 255, 0.5);
+    position: relative;
+    margin: 12% 0;
+    border-radius: 20px;
+    box-shadow: (2px 2px 20px rgba(11, 11, 11, 0.17));
+    header, .search-container {
+        padding: 0 17px;
+    }
+
+}
 
 .search {
     &-container {
         font-size: $searchFontSize;
         form {
+            margin: 17px 0;
+            font-weight: 300;
+            color: black;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             * {
-                margin: 5px;
+                margin: 5px 0;
+          
             }
             button {
-                font-size: 17px;
-                padding: 5px;
-                min-width: 175px;
+                width: 100%;
+                font-size: 17.66px;
+                padding: 10px;
+                min-width: 150px;
                 color: white;
+                background: #2b2b2b;
+                border: 2px solid white;
                 border-radius: 20px;
-                background: grey;
+                transition: background 133ms ease;
                 cursor: pointer;
                 &:hover {
-                    background: lightblue;
+                    background: #d1eabb;
                     color: black;
                 }
             }
-           
         }
     }
     &-inputs {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
+        input {
+           min-height: 45px;
+           border: 1px solid black;
+           min-height: 25px;
+           min-width: 255px;
+           max-width: 255px;
+           padding: 7.66px;
+           font-size: $searchFontSize;
+           color: black;
+        }
     }
 }
 
+.render-container {
+    margin: 8px auto;
+}
 .info-container {
+    margin-bottom: 30px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 4%;
+    padding: 0%;
+    cursor: default;
     h1, p{
         margin: 0 auto;
         padding: 0;
+        transition: $fadeDuration;
+    }
+    p {
+        font-family: $Roboto;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+
+    }
+    h1 {
+        width: 100%;
+        font-family: $Roboto;
+        font-weight: 900;
+        letter-spacing: 0.03em;
+        font-size: 75px;
+        -webkit-text-stroke-width: 2px;
+        color: transparent;
+        //-webkit-text-stroke-color: $secondaryColor;
     }
 }
 
@@ -163,19 +244,9 @@ footer {
 
 .artist-name {
     font-size: $searchFontSize;
-    color: #707070
+    //color: #707070
 }
 
-input {
-    border: 1px solid black;
-    min-height: 25px;
-    min-width: 225px;
-    max-width: 225px;
-    padding: 1%;
-    font-size: $searchFontSize;
-    color: $highlightColor;
-
-}
 
 
 .keyword {
@@ -193,9 +264,9 @@ input {
     p {
         margin: 0;
         padding: 0;
-        color: $highlightColor;
+        //color: $highlightColor;
         &:hover {
-        color: $hoverColor;
+        opacity: 0.42;
         ~img {
             display: inline-block;
         }
@@ -225,6 +296,7 @@ input {
         background: $hoverColor;
         color: yellow;
         display: none;
+        font-weight: 700;
         text-align: center;
         padding: 6px 4px;
         margin: 0 auto;
@@ -238,6 +310,22 @@ input {
 }
 
 @media (min-width: 768px)  {
+    #console {
+        align-self: flex-start;
+        justify-self: start;
+        position: absolute;
+        top: 0;
+        padding: 17.66px;
+    }
+    .lyrics-text {
+        font-size: $lyricsFontSize;
+    }
+.info-container {
+    margin-bottom: 50px;
+    h1 {
+        width: 50%;
+    }
+}
   .key-gif {
       img {
         min-width: 350px;
@@ -246,4 +334,10 @@ input {
         max-height: 350px; 
       }
   }
+  .view-switch {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+  }
+  
 }
