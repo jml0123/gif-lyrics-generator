@@ -86,8 +86,8 @@ const getLyrics = async (songName, artist) => {
     try {
         songName.replace(/\s/g, '%20');
         (artist)? artist.replace(/\s/g, '%20') : null;
-        //let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
-        let response = await fetch(`https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
+        let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
+        //let response = await fetch(`https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
         const search_data = await response.json();
         console.log(search_data)
         const lyrics_raw = await search_data.message.body.lyrics.lyrics_body;
@@ -107,8 +107,8 @@ const getLyrics = async (songName, artist) => {
 const getSongTitleArtistName = async (songName, artist) => {
        /* Render artist, song and album on top */ 
        try {
-            //let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.track.get?q_artist=${artist}&q_track=${songName}&apikey=${MUSIX_KEY}`)
-            let response = await fetch(`https://api.musixmatch.com/ws/1.1/matcher.track.get?q_artist=${artist}&q_track=${songName}&apikey=${MUSIX_KEY}`)
+            let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.track.get?q_artist=${artist}&q_track=${songName}&apikey=${MUSIX_KEY}`)
+            //let response = await fetch(`https://api.musixmatch.com/ws/1.1/matcher.track.get?q_artist=${artist}&q_track=${songName}&apikey=${MUSIX_KEY}`)
 
             const track_match = await response.json();
             const track_name = track_match.message.body.track.track_name;
