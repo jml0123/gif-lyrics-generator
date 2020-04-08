@@ -69,7 +69,6 @@ section {
   cursor: default; }
   .lyrics-text--error {
     margin: 0 auto;
-    width: 420px;
     color: red;
     text-align: center; }
 
@@ -206,7 +205,7 @@ header {
     font-family: "Roboto", sans-serif;
     font-weight: 900;
     letter-spacing: 0.03em;
-    font-size: 75px;
+    font-size: 18vw;
     -webkit-text-stroke-width: 2px;
     color: transparent; }
 
@@ -223,6 +222,7 @@ header {
   .keyword img {
     max-width: 300px;
     max-height: 300px;
+    width: 66vw;
     border: 1.5px #f29d0c;
     display: none;
     position: absolute;
@@ -295,7 +295,8 @@ header {
   .info-container {
     margin-bottom: 50px; }
     .info-container h1 {
-      width: 50%; }
+      width: 50%;
+      font-size: 75px; }
 
   .key-gif img {
     min-width: 350px;

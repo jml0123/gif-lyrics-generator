@@ -352,18 +352,18 @@ const showConsole = () => {
 // Function to hide console when idle 
 const hideConsole = () => { 
     document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
-    document.querySelector(".console-wrapper").style.opacity = "0.3" 
+    document.querySelector(".console-wrapper").style.opacity = "0.33" 
 
     document.querySelector(".console").addEventListener("mouseout", () => {
         document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
         document.querySelector(".console-wrapper").style.transitionDelay = "5s" 
-        document.querySelector(".console-wrapper").style.opacity = "0.3" 
+        document.querySelector(".console-wrapper").style.opacity = "0.33" 
     })
 
     document.querySelector(".hover-div").addEventListener("mouseout", () => {
         document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
         document.querySelector(".console-wrapper").style.transitionDelay = "5s" 
-        document.querySelector(".console-wrapper").style.opacity = "0.3" 
+        document.querySelector(".console-wrapper").style.opacity = "0.33" 
     })
 }
 
