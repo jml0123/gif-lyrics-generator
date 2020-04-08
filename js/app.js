@@ -60,10 +60,10 @@ const COLOR_THEMES = [
     },
     {
         name: "deyoung",
-        primary: "cmyk(96%, 0%, 100%, 42%)",
-        secondary: "cmyk(8%, 61%, 78%, 0%)",
-        textColor: "cmyk(40%, 30%, 30%, 100%)"
-    },
+        primary: "rgb(6, 148, 0)",
+        secondary: "rgb(235, 99, 56)",
+        textColor: "rgb(11, 11, 11)"
+    }, // This neeeds to be rgb format.
 ]
 
 /************ INITIAL STATES /************/
@@ -232,6 +232,8 @@ const lyricsView = async (list_of_words) => {
     for (i = 0; i < list_of_words.length; i++) {
         gif_lyrics += (typeof list_of_words[i] === "object" && await list_of_words[i].imgSrc != "")? 
         (`<span class="keyword"><p>${list_of_words[i].value}&nbsp</p><img src="${await list_of_words[i].imgSrc}"></span>`) 
+        : (typeof list_of_words[i] === "object" && await list_of_words[i].imgSrc === "")? 
+        (`${list_of_words[i].value} `) 
         : (`${list_of_words[i]} `)
     }
 
@@ -324,7 +326,7 @@ const assignTheme = async (themes) => {
     song_artist.style.color = theme.textColor;
     lyrics_text.style.color = theme.textColor;
     keyword_text.forEach(word => word.style.color = theme.secondary);
-
+    console.log(`${theme.name} theme activated...`);
     CURRENT_THEME = theme;
 }
 
@@ -351,20 +353,22 @@ const showConsole = () => {
 
 // Function to hide console when idle 
 const hideConsole = () => { 
-    document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
+    document.querySelector(".console-wrapper").style.transform = "translateX(-465px)" 
     document.querySelector(".console-wrapper").style.opacity = "0.33" 
 
     document.querySelector(".console").addEventListener("mouseout", () => {
-        document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
+        document.querySelector(".console-wrapper").style.transform = "translateX(-465px)" 
         document.querySelector(".console-wrapper").style.transitionDelay = "5s" 
         document.querySelector(".console-wrapper").style.opacity = "0.33" 
     })
 
     document.querySelector(".hover-div").addEventListener("mouseout", () => {
-        document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
+        document.querySelector(".console-wrapper").style.transform = "translateX(-465px)" 
         document.querySelector(".console-wrapper").style.transitionDelay = "5s" 
         document.querySelector(".console-wrapper").style.opacity = "0.33" 
     })
+
+
 }
 
 // If window is smaller than 768px, don't hide console

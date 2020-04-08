@@ -119,7 +119,7 @@ header {
   width: 100%;
   background: rgba(44, 44, 186, 0.66);
   transition: 450ms ease;
-  border-radius: 12px; }
+  border-radius: 8px; }
   .console header, .console .search-container {
     padding: 0 0px; }
 
@@ -277,6 +277,7 @@ header {
 
   .console {
     cursor: default;
+    border: 1px dashed #e6e6e6;
     max-width: 445px;
     padding: 3.66px; }
     .console header, .console .search-container {
@@ -284,7 +285,8 @@ header {
     .console-wrapper {
       transition: 450ms ease;
       position: fixed;
-      width: 472px; }
+      width: 472px;
+      z-index: 2; }
 
   .hover-div {
     display: block; }
