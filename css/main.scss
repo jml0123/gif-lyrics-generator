@@ -133,9 +133,6 @@ section {
         transition: 100ms ease;
       
     }
-    /*&:hover > .circle{
-        transform: translateX(50px)
-    }*/
 }
 
 .grid-view {
@@ -216,11 +213,9 @@ header {
                     color: black;
                 }
             }
-            label {
-                //background: #2C2CBA;
-            }
         }
     }
+
     &-inputs {
         display: flex;
         flex-direction: column;

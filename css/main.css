@@ -82,10 +82,7 @@ section {
   width: 120px;
   height: 55px;
   border-radius: 100px;
-  transition: 100ms ease;
-  /*&:hover > .circle{
-      transform: translateX(50px)
-  }*/ }
+  transition: 100ms ease; }
   .view-switch p {
     margin: 0 10px;
     text-align: center; }
