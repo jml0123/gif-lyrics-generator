@@ -16,11 +16,13 @@ main {
   min-height: 100vh; }
 
 section {
-  padding: 1%; }
+  width: 100vw; }
 
 .dev-info {
+  z-index: 2;
   top: 0;
-  position: absolute;
+  cursor: pointer;
+  position: fixed;
   color: white;
   background: #111111; }
   .dev-info .links-wrapper a {
@@ -51,8 +53,7 @@ section {
   padding: 0.88% 8%;
   width: 100vw;
   height: 100%;
-  margin: 2.5% auto;
-  min-height: 100vh; }
+  margin: 2.5% auto; }
 
 .lyrics-text {
   font-family: "Roboto", sans-serif;
@@ -105,46 +106,55 @@ section {
   margin: 0 auto;
   align-items: center; }
 
+header {
+  width: 100%;
+  color: gold;
+  text-align: left;
+  font-size: 15px; }
+
 .console {
-  padding: 3.66px;
-  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
   position: relative;
-  margin: 12% 0;
-  border-radius: 20px;
-  box-shadow: 2px 2px 20px rgba(11, 11, 11, 0.17);
-  transition: 450ms ease; }
+  margin: 12% 0px;
+  width: 100%;
+  background: rgba(44, 44, 186, 0.66);
+  transition: 450ms ease;
+  border-radius: 12px; }
   .console header, .console .search-container {
-    padding: 0 17px; }
+    padding: 0 0px; }
 
 .hover-div {
+  display: none;
   position: absolute;
-  left: 0;
+  right: 0;
+  top: 25%;
   padding: 0;
   margin: 0;
-  height: 40vh;
-  width: 45vw; }
+  height: 80px;
+  width: 20px;
+  background: lightgrey;
+  border-radius: 20px;
+  cursor: pointer; }
 
 .search-container {
-  font-size: 20px; }
+  font-size: 33px; }
   .search-container form {
     margin: 17px 0;
     font-weight: 300;
-    color: black;
+    color: white;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center; }
+    align-items: flex-start;
+    justify-content: flex-start; }
     .search-container form * {
       margin: 5px 0; }
     .search-container form button {
       width: 100%;
       font-size: 17.66px;
       padding: 10px;
-      min-width: 150px;
       color: white;
       background: #2b2b2b;
       border: 2px solid white;
-      border-radius: 20px;
       transition: background 133ms ease;
       cursor: pointer; }
       .search-container form button:hover {
@@ -154,17 +164,22 @@ section {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center; }
+  align-items: flex-start;
+  justify-content: flex-start; }
   .search-inputs input {
+    border: none;
     min-height: 45px;
-    border: 1px solid black;
-    min-height: 25px;
-    min-width: 255px;
-    max-width: 255px;
     padding: 7.66px;
-    font-size: 20px;
-    color: black; }
+    width: 100%;
+    font-size: 33px;
+    color: #f9899c;
+    background: #2C2CBA;
+    box-shadow: none; }
+    .search-inputs input::placeholder {
+      color: #bababa; }
+    .search-inputs input:focus {
+      transition: color 500ms ease;
+      color: #f9899c; }
 
 .render-container {
   margin: 8px auto; }
@@ -198,7 +213,7 @@ section {
   font-size: 31px; }
 
 .artist-name {
-  font-size: 20px; }
+  font-size: 33px; }
 
 .keyword {
   display: inline-block;
@@ -256,6 +271,20 @@ section {
     position: absolute;
     top: 0;
     padding: 17.66px; }
+
+  .console {
+    cursor: default;
+    max-width: 445px;
+    padding: 3.66px; }
+    .console header, .console .search-container {
+      padding: 0 17px; }
+    .console-wrapper {
+      transition: 450ms ease;
+      position: fixed;
+      width: 472px; }
+
+  .hover-div {
+    display: block; }
 
   .lyrics-text {
     font-size: 31px; }

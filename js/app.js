@@ -298,8 +298,6 @@ const assignTheme = async (themes) => {
     const song_artist = document.querySelector(".info-container p") // black or white
     const keyword_text = document.querySelectorAll(".keyword") // secondary
     const gif_img = document.querySelectorAll(".keyword img")
-    // footer
-
 
     let theme = ""
     
@@ -324,34 +322,48 @@ const assignTheme = async (themes) => {
 
 const showConsole = () => { 
     document.querySelector(".console").addEventListener("mouseover", () => {
-        document.querySelector(".console").style.transform = "translateX(0px)" 
-        document.querySelector(".console").style.opacity = "1" 
+        document.querySelector(".console-wrapper").style.transform = "translateX(0px)" 
+        document.querySelector(".console-wrapper").style.transitionDelay = "0s" 
+        document.querySelector(".console-wrapper").style.opacity = "1" 
     })
     document.querySelector(".hover-div").addEventListener("mouseover", () => {
-        document.querySelector(".console").style.transform = "translateX(0px)" 
-        document.querySelector(".console").style.opacity = "1" 
+        document.querySelector(".console-wrapper").style.transform = "translateX(0px)" 
+        document.querySelector(".console-wrapper").style.transitionDelay = "0s" 
+        document.querySelector(".console-wrapper").style.opacity = "1" 
     })
     document.querySelector(".search-box").addEventListener("mouseover", () => {
-        document.querySelector(".console").style.transform = "translateX(0px)" 
-        document.querySelector(".console").style.opacity = "1" 
+        document.querySelector(".console-wrapper").style.transform = "translateX(0px)" 
+        document.querySelector(".console-wrapper").style.transitionDelay = "0s" 
+        document.querySelector(".console-wrapper").style.opacity = "1" 
     })
 }
 
 
 
 const hideConsole = () => { 
-    document.querySelector(".console").style.transform = "translateX(-420px)" 
-    document.querySelector(".console").style.opacity = "0" 
+    document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
+    document.querySelector(".console-wrapper").style.opacity = "0.3" 
 
     document.querySelector(".console").addEventListener("mouseout", () => {
-        setTimeout(hideConsole, 8000)
+        document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
+        document.querySelector(".console-wrapper").style.transitionDelay = "5s" 
+        document.querySelector(".console-wrapper").style.opacity = "0.3" 
     })
 
     document.querySelector(".hover-div").addEventListener("mouseout", () => {
-        setTimeout(hideConsole, 8000)
+        document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
+        document.querySelector(".console-wrapper").style.transitionDelay = "5s" 
+        document.querySelector(".console-wrapper").style.opacity = "0.3" 
     })
 }
 
+const detectWindow = () => {
+    const mediaQuery = window.matchMedia( "(min-width: 768px)" );
+    if (mediaQuery.matches) {
+        showConsole();
+        setTimeout(hideConsole, 5000)
+    }
+}
 
 /* FORM METHODS */ 
 const handleFormSubmit = () => {
@@ -360,18 +372,26 @@ const handleFormSubmit = () => {
         e.preventDefault();
         const track = document.querySelector("#track-search").value;
         const artist = document.querySelector("#artist-search").value;
+        if (track === "" || artist === "") {
+            return alert("Please type in a song and an artist name.")
+        }
         handleTrack(track, artist)
         getSongTitleArtistName(track, artist)  
       })
   }
 
 
+
+const mediaQuery = window.matchMedia( "(min-width: 768px)" );
+
+
+
+
 /* MAIN APP */
 const main = () => {
     handleFormSubmit();
     handleViewSwitch();
-    showConsole();
-    setTimeout(hideConsole, 9200)
+    detectWindow()
 }
 
 main();
@@ -380,4 +400,3 @@ main();
 // Have a wrapper
 // Group related functions together and comment it
 // Lint/indexing
-

@@ -1,7 +1,7 @@
 $highlightColor: #f29d0c;
 $secondaryColor: orange;
 $hoverColor: blue;
-$searchFontSize: 20px;
+$searchFontSize: 33px;
 $lyricsFontSize: 31px;
 $lyricsFontSizeMobile: 27px;
 $gridFontSize: 42px;
@@ -34,14 +34,17 @@ main {
 }
 
 section {
-    padding: 1%;
+    width: 100vw;
+
 }
 
 
 
 .dev-info {
+    z-index: 2;
     top: 0;
-    position: absolute;
+    cursor: pointer;
+    position: fixed;
     color: white;
     background: #111111;
     .links-wrapper  a{
@@ -78,7 +81,7 @@ section {
     height: 100%;
     //border: 1px solid grey;
     margin: 2.5% auto;
-    min-height: 100vh;
+    //min-height: 100vh;
 }
 
 .lyrics-text{
@@ -142,38 +145,44 @@ section {
     align-items: center;
 
 }
-.console {
-    padding: 3.66px;
-    background: rgba(255, 255, 255, 0.5);
-    position: relative;
-    margin: 12% 0;
-    //opacity: 0;
-    border-radius: 20px;
-    box-shadow: (2px 2px 20px rgba(11, 11, 11, 0.17));
-    transition: 450ms ease;
-    //transform: translateX(-420px);
-    &:hover {
-       // transform: translateX(0);
-       // opacity: 1;
-    }
-    header, .search-container {
-        padding: 0 17px;
-    }
 
+
+header {
+    width: 100%;
+    color: gold;
+    text-align: left;
+    font-size: 15px;
+  
+}
+.console {
+    padding: 20px;
+    position: relative;
+    margin: 12% 0px;
+    width: 100%;
+    background: rgba(44, 44, 186, 0.66);
+    transition: 450ms ease;
+    border-radius: 12px;
+    header, .search-container {
+        padding: 0 0px;
+    }
+    
 }
 
+
+
 .hover-div {
+    display: none;
     position: absolute;
-    left: 0;
+    right: 0;
+    top: 25%;
     padding: 0;
     margin: 0;
-    height: 40vh;
-    width: 45vw;
-    //background: grey;
-    &:hover ~ .console {
-       // transform: translateX(0);
-       // opacity: 1;
-    }
+    height: 80px;
+    width: 20px;
+    background: lightgrey;
+    border-radius: 20px;
+    cursor: pointer;
+
 }
 
 .search {
@@ -182,11 +191,11 @@ section {
         form {
             margin: 17px 0;
             font-weight: 300;
-            color: black;
+            color: white;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            align-items: flex-start;
+            justify-content: flex-start;
             * {
                 margin: 5px 0;
           
@@ -195,11 +204,11 @@ section {
                 width: 100%;
                 font-size: 17.66px;
                 padding: 10px;
-                min-width: 150px;
+                //min-width: 150px;
                 color: white;
                 background: #2b2b2b;
                 border: 2px solid white;
-                border-radius: 20px;
+                //border-radius: 20px;
                 transition: background 133ms ease;
                 cursor: pointer;
                 &:hover {
@@ -207,23 +216,33 @@ section {
                     color: black;
                 }
             }
+            label {
+                //background: #2C2CBA;
+            }
         }
     }
     &-inputs {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
         input {
+           border: none;
            min-height: 45px;
-           border: 1px solid black;
-           min-height: 25px;
-           min-width: 255px;
-           max-width: 255px;
            padding: 7.66px;
+           width: 100%;
            font-size: $searchFontSize;
-           color: black;
+           color: #f9899c;
+           background: #2C2CBA;
+           box-shadow: none;
+           &::placeholder {
+               color: #bababa
+           }
+           &:focus {
+                transition: color 500ms ease;
+                color: #f9899c;
+           }
         }
     }
 }
@@ -341,6 +360,24 @@ section {
         position: absolute;
         top: 0;
         padding: 17.66px;
+    }
+
+    .console {
+        cursor: default;
+        max-width: 445px;
+        padding: 3.66px;
+        header, .search-container {
+            padding: 0 17px;
+        }
+        &-wrapper {
+            transition: 450ms ease;
+            position: fixed;
+            width: 472px;
+            //background: red;
+        }
+    }
+    .hover-div {
+        display: block;
     }
     .lyrics-text {
         font-size: $lyricsFontSize;
