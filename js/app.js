@@ -147,26 +147,32 @@ const parseLyrics = (lyrics_data) => {
 
     console.log(lyrics_data)
 
-    // Replace all new lines with line break (<br>), then split all words into an array
-    parsedLyrics = lyrics_data.replace(/(?:\r\n|\r|\n)/g, '<br>').split(/\s+/);
 
+    console.log(keywords)
+
+
+
+    // Replace all new lines with line break (<br>), then split all words into an array
+    parsedLyrics = lyrics_data.split(/ +?/g);
+
+    console.log(parsedLyrics);
     // Make the parsed word into an object if it's a keyword with a blank imgSrc
     for (i = 0; i < parsedLyrics.length ; i++) {
-        if (keywords.includes(parsedLyrics[i])) {
+        let htmlString = parsedLyrics[i].replace(/\n/ig, "<br>")
+        let matchedWord = parsedLyrics[i].split(/(\r\n|\n|\r)/gm)[0];
+        if (keywords.includes(matchedWord)) {
             parsedLyrics[i] = 
-            {
-                value: parsedLyrics[i],
+            {   
+                value: matchedWord,
+                htmlVal: htmlString,
                 imgSrc: "",
                 alt: ""
             }
         }
     }
-    console.log(keywords);
-    console.log(parsedLyrics);
-
-    // Return the array of strings (regular words) and objects (keywords) 
-    // While filtering out any blank indices
-    return parsedLyrics.filter(w => w != '');
+   console.log(parsedLyrics);       
+   
+   return parsedLyrics.filter(w => w != "");
 }
 
 const handleTrack = async (song, artist) => {
@@ -230,11 +236,25 @@ const lyricsView = async (list_of_words) => {
 
     // For each word in the lyrics array, if the word is a key word and there is a gif associated with it, render it onto the page, lyrics first
     for (i = 0; i < list_of_words.length; i++) {
-        gif_lyrics += (typeof list_of_words[i] === "object" && await list_of_words[i].imgSrc != "")? 
-        (`<span class="keyword"><p>${list_of_words[i].value}&nbsp</p><img src="${await list_of_words[i].imgSrc}"></span>`) 
-        : (typeof list_of_words[i] === "object" && await list_of_words[i].imgSrc === "")? 
-        (`${list_of_words[i].value} `) 
-        : (`${list_of_words[i]} `)
+        if (typeof list_of_words[i] === "object" && await list_of_words[i].imgSrc != "") {
+            if (list_of_words[i].htmlVal.includes("<br>")) {
+                let splitString = list_of_words[i].htmlVal.split(/(?=<br>)/g)
+                console.log(splitString)
+                gif_lyrics += `<span class="keyword"><p>${splitString[0]}&nbsp</p><img src="${await list_of_words[i].imgSrc}"></span>
+                ${splitString.slice(1).join("")}&nbsp`
+            }
+            else {
+                gif_lyrics += `<span class="keyword"><p>${list_of_words[i].htmlVal}&nbsp</p><img src="${await list_of_words[i].imgSrc}"></span>`
+            }    
+        }
+
+        else if (typeof list_of_words[i] === "object" && await list_of_words[i].imgSrc === "") {
+            gif_lyrics +=  `${list_of_words[i].htmlVal}&nbsp`
+        }
+    
+        else {
+            gif_lyrics += `${list_of_words[i]}&nbsp`
+        }
     }
 
     const html_lyrics = 
@@ -245,6 +265,7 @@ const lyricsView = async (list_of_words) => {
 
     return html_lyrics
 }
+
 
 // Function to switch views to grid mode
 const gridView = async (list_of_words) => {
