@@ -1,18 +1,11 @@
 $highlightColor: #f29d0c;
-$secondaryColor: orange;
 $hoverColor: blue;
 $searchFontSize: 33px;
 $lyricsFontSize: 31px;
 $lyricsFontSizeMobile: 27px;
 $gridFontSize: 42px;
 $Roboto: 'Roboto', sans-serif;
-$fadeDuration: 250ms ease;
-
-// lyrics text
-// highlight color
-// title
-// artist name
-// grid switch
+$fadeDurationStd: 250ms ease;
 
 * {
     box-sizing: border-box;
@@ -20,7 +13,7 @@ $fadeDuration: 250ms ease;
 body {
     background: #111111;
     margin: 0;
-    transition: $fadeDuration;
+    transition: $fadeDurationStd;
 }
 
 main {
@@ -31,6 +24,8 @@ main {
     font-family: $Roboto;
     background: #2c2cba;
     min-height: 100vh;
+    overflow: hidden;
+    padding-bottom: 3%;
 }
 
 section {
@@ -79,9 +74,7 @@ section {
     padding: 0.88% 8%;
     width: 100vw;
     height: 100%;
-    //border: 1px solid grey;
     margin: 2.5% auto;
-    //min-height: 100vh;
 }
 
 .lyrics-text{
@@ -92,10 +85,12 @@ section {
     letter-spacing: 0.03em;
     text-align: center;
     margin: 0 auto;
-    transition: $fadeDuration;
+    transition: $fadeDurationStd;
     cursor: default;
     &--error {
-        color: maroon;
+        margin: 0 auto;
+        width: 420px;
+        color: red;
         text-align: center;
     }
 }
@@ -108,7 +103,6 @@ section {
     justify-content: center;
     align-items: center;
     position: relative;
-    //right: 3%;
     font-size: 15px;
     margin: 0 auto;
 
@@ -201,11 +195,9 @@ header {
                 width: 100%;
                 font-size: 17.66px;
                 padding: 10px;
-                //min-width: 150px;
                 color: white;
                 background: #2b2b2b;
                 border: 2px solid white;
-                //border-radius: 20px;
                 transition: background 133ms ease;
                 cursor: pointer;
                 &:hover {
@@ -256,7 +248,7 @@ header {
     h1, p{
         margin: 0 auto;
         padding: 0;
-        transition: $fadeDuration;
+        transition: $fadeDurationStd;
     }
     p {
         font-family: $Roboto;
@@ -272,7 +264,6 @@ header {
         font-size: 75px;
         -webkit-text-stroke-width: 2px;
         color: transparent;
-        //-webkit-text-stroke-color: $secondaryColor;
     }
 }
 
@@ -303,7 +294,6 @@ header {
     p {
         margin: 0;
         padding: 0;
-        //color: $highlightColor;
         &:hover {
         opacity: 0.42;
         ~img {
@@ -327,6 +317,7 @@ header {
         padding: 5px;
         height: auto;
         margin: 0;
+        border-color: $highlightColor;
   
     }
     p{
@@ -342,7 +333,8 @@ header {
         font-size: $gridFontSize;
     }
     &:hover {
-        img {border: 5px solid $highlightColor };
+        img {border-width: 5px;
+             border-style: solid };
         p {display: inline-block;}
 
     }
@@ -368,7 +360,6 @@ header {
             transition: 450ms ease;
             position: fixed;
             width: 472px;
-            //background: red;
         }
     }
     .hover-div {

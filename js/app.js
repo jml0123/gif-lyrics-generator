@@ -1,3 +1,5 @@
+/************ GLOBAL CONSTANTS ************/
+
 const MUSIX_KEY = '06b4409f6ef339768789f20421155dad';
 const GIPHY_KEY = "rgXdbqSnr24kKy3JgEjCAFctsgKCR4Zr"
 const render_container = document.querySelector(".render-container");
@@ -33,12 +35,6 @@ const COLOR_THEMES = [
         textColor: "rgb(252, 246, 239)"
     },
     {
-        name: "gamecores",
-        primary: "rgb(206, 130, 168)",
-        secondary: "rgb(35, 180, 210)",
-        textColor: "rgb(5, 15, 50)"
-    },
-    {
         name: "holnap",
         primary: "rgb(58, 53, 206)",
         secondary: "rgb(237, 29, 36)",
@@ -68,26 +64,24 @@ const COLOR_THEMES = [
         secondary: "cmyk(8%, 61%, 78%, 0%)",
         textColor: "cmyk(40%, 30%, 30%, 100%)"
     },
-    
-    
-
 ]
 
+/************ INITIAL STATES /************/
 
-
-let CURRENT_THEME = ""
+let CURRENT_THEME = "" // Variable to capture color themes when user switches views
 let GIF_LYRICS = "";
 let gridActive = false;
-let setInitialState = true;
+let setInitialState = true; // Variable to capture whether a user first visits or if a new song has been looked up
 
-/* TRACK METHODS */ 
+/************ SONG/TRACK METHODS ************/ 
+
+// Get Lyrics from MusixMatch API. Returns string
 const getLyrics = async (songName, artist) => {
 
     try {
         songName.replace(/\s/g, '%20');
         (artist)? artist.replace(/\s/g, '%20') : null;
         let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
-        //let response = await fetch(`https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?q_track=${songName}&q_artist=${artist}&apikey=${MUSIX_KEY}`);
         const search_data = await response.json();
         console.log(search_data)
         const lyrics_raw = await search_data.message.body.lyrics.lyrics_body;
@@ -104,11 +98,11 @@ const getLyrics = async (songName, artist) => {
     }
 }
 
+// Get Song Info From MusixMatch API
 const getSongTitleArtistName = async (songName, artist) => {
        /* Render artist, song and album on top */ 
        try {
             let response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/matcher.track.get?q_artist=${artist}&q_track=${songName}&apikey=${MUSIX_KEY}`)
-            //let response = await fetch(`https://api.musixmatch.com/ws/1.1/matcher.track.get?q_artist=${artist}&q_track=${songName}&apikey=${MUSIX_KEY}`)
 
             const track_match = await response.json();
             const track_name = track_match.message.body.track.track_name;
@@ -128,12 +122,15 @@ const getSongTitleArtistName = async (songName, artist) => {
        }
 }
 
+// Parse Lyrics using Compromise NLP Library
 const parseLyrics = (lyrics_data) => {
     //const punctuation = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
     let lyrics = nlp(lyrics_data);
 
+    // Create a keywords array
     const keywords = [];
 
+    // Parse lyrics using Compromise
     const verbs = lyrics.verbs().json();
     const nouns = lyrics.nouns().json();
     const adjectives = lyrics.adjectives().json();
@@ -141,17 +138,19 @@ const parseLyrics = (lyrics_data) => {
     const topics = lyrics.topics().json();
     const adverbs =  lyrics.adverbs().json();
 
+    // Add to keyword list if it's a keyword
     nouns.forEach(noun => { keywords.push(noun.text)})
     verbs.forEach(verb => { keywords.push(verb.text)})
     adjectives.forEach(adjective => {keywords.push(adjective.text)})
     adverbs.forEach(adverb => {keywords.push(adverb.text)})
     topics.forEach(topic => {keywords.push(topic.text)})
 
-    // REFACTOR split all words, if words are either nouns, names, objects, places adverbs, make it into object below
-    //parsedLyrics = lyrics_data
     console.log(lyrics_data)
+
+    // Replace all new lines with line break (<br>), then split all words into an array
     parsedLyrics = lyrics_data.replace(/(?:\r\n|\r|\n)/g, '<br>').split(/\s+/);
 
+    // Make the parsed word into an object if it's a keyword with a blank imgSrc
     for (i = 0; i < parsedLyrics.length ; i++) {
         if (keywords.includes(parsedLyrics[i])) {
             parsedLyrics[i] = 
@@ -164,23 +163,26 @@ const parseLyrics = (lyrics_data) => {
     }
     console.log(keywords);
     console.log(parsedLyrics);
+
+    // Return the array of strings (regular words) and objects (keywords) 
+    // While filtering out any blank indices
     return parsedLyrics.filter(w => w != '');
 }
 
 const handleTrack = async (song, artist) => {
     setInitialState = true;
-    //gridActive = false;
+
     render_container.innerHTML = ""; 
     const track = await getLyrics(song, artist);
     const parsed_track = parseLyrics(track);
     GIF_LYRICS = await assignGifs(parsed_track);
-    //console.log(lyrics_with_gifs)
+
     renderView(GIF_LYRICS);
     
 }
 
 
-/* IMG ASSIGNMENT METHODS */
+/************ IMG ASSIGNMENT METHODS ************/
 const searchGif = async (searchTerm) => {
     const selection = Math.floor(Math.random() * 5);
 
@@ -208,7 +210,7 @@ const assignGifs = async (lyrics) => {
     return lyrics
 }
 
-/* HTML RENDER METHODS */ 
+/************ HTML RENDER METHODS ************/ 
 const renderTrackInfo = (track_obj) =>{
     document.querySelector(".track-info").innerHTML = `
         <div class="info-container">
@@ -218,6 +220,7 @@ const renderTrackInfo = (track_obj) =>{
     `
 }
 
+// Function to switch views to lyrics mode
 const lyricsView = async (list_of_words) => {
     document.querySelector(".view-switch").style.background = "lightgrey";
     document.querySelector(".view-switch").style.color = "black";
@@ -225,8 +228,9 @@ const lyricsView = async (list_of_words) => {
 
     let gif_lyrics = "";
 
+    // For each word in the lyrics array, if the word is a key word and there is a gif associated with it, render it onto the page, lyrics first
     for (i = 0; i < list_of_words.length; i++) {
-        gif_lyrics += (typeof list_of_words[i] === "object")? 
+        gif_lyrics += (typeof list_of_words[i] === "object" && await list_of_words[i].imgSrc != "")? 
         (`<span class="keyword"><p>${list_of_words[i].value}&nbsp</p><img src="${await list_of_words[i].imgSrc}"></span>`) 
         : (`${list_of_words[i]} `)
     }
@@ -240,13 +244,16 @@ const lyricsView = async (list_of_words) => {
     return html_lyrics
 }
 
+// Function to switch views to grid mode
 const gridView = async (list_of_words) => {
     document.querySelector(".view-switch").style.background = "blue";
     document.querySelector(".view-switch").style.color = "white";
     document.querySelector(".circle").style.transform = "translateX(50px)";
     let grid_of_gifs = "";
+
+    // For each word in the lyrics array, if the word is a key word and there is a gif associated with it, render it onto the page, gif first
     for (i = 0; i < list_of_words.length; i++) {
-        if (typeof list_of_words[i] === "object") {
+        if (typeof list_of_words[i] === "object" && await list_of_words[i].imgSrc != "") {
             grid_of_gifs += 
             `<div class="key-gif">
                 <img src=${await list_of_words[i].imgSrc}>
@@ -270,6 +277,7 @@ const handleViewSwitch = () => {
     })
 }
 
+// Renders dynamic elements into html 
 const renderView = async (lyrics) => {
     if (setInitialState) {
         document.querySelector(".view-switch").style.display = "flex";
@@ -291,13 +299,14 @@ const renderView = async (lyrics) => {
     }
 }
 
+// Function to change colors randomly upon search, based on pre-set themes
 const assignTheme = async (themes) => {
     const main = document.querySelector("main") // primary
     const lyrics_text = document.querySelector(".lyrics-text") // black or white
     const song_title = document.querySelector(".info-container h1") // secondary
     const song_artist = document.querySelector(".info-container p") // black or white
     const keyword_text = document.querySelectorAll(".keyword") // secondary
-    const gif_img = document.querySelectorAll(".keyword img")
+
 
     let theme = ""
     
@@ -315,11 +324,12 @@ const assignTheme = async (themes) => {
     song_artist.style.color = theme.textColor;
     lyrics_text.style.color = theme.textColor;
     keyword_text.forEach(word => word.style.color = theme.secondary);
-    // img
-    // footer
+
     CURRENT_THEME = theme;
 }
 
+
+// Function to show console on user interaction
 const showConsole = () => { 
     document.querySelector(".console").addEventListener("mouseover", () => {
         document.querySelector(".console-wrapper").style.transform = "translateX(0px)" 
@@ -339,7 +349,7 @@ const showConsole = () => {
 }
 
 
-
+// Function to hide console when idle 
 const hideConsole = () => { 
     document.querySelector(".console-wrapper").style.transform = "translateX(-460px)" 
     document.querySelector(".console-wrapper").style.opacity = "0.3" 
@@ -357,6 +367,7 @@ const hideConsole = () => {
     })
 }
 
+// If window is smaller than 768px, don't hide console
 const detectWindow = () => {
     const mediaQuery = window.matchMedia( "(min-width: 768px)" );
     if (mediaQuery.matches) {
@@ -365,7 +376,7 @@ const detectWindow = () => {
     }
 }
 
-/* FORM METHODS */ 
+/************ FORM METHODS ************/ 
 const handleFormSubmit = () => {
     document.querySelector("button[type='submit']")
       .addEventListener("click", (e) => {
@@ -380,14 +391,7 @@ const handleFormSubmit = () => {
       })
   }
 
-
-
-const mediaQuery = window.matchMedia( "(min-width: 768px)" );
-
-
-
-
-/* MAIN APP */
+/************ MAIN APP ************/
 const main = () => {
     handleFormSubmit();
     handleViewSwitch();
@@ -396,7 +400,4 @@ const main = () => {
 
 main();
 
-// Make naming clearer
-// Have a wrapper
-// Group related functions together and comment it
-// Lint/indexing
+

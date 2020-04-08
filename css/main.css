@@ -13,7 +13,9 @@ main {
   justify-content: center;
   font-family: "Roboto", sans-serif;
   background: #2c2cba;
-  min-height: 100vh; }
+  min-height: 100vh;
+  overflow: hidden;
+  padding-bottom: 3%; }
 
 section {
   width: 100vw; }
@@ -66,7 +68,9 @@ section {
   transition: 250ms ease;
   cursor: default; }
   .lyrics-text--error {
-    color: maroon;
+    margin: 0 auto;
+    width: 420px;
+    color: red;
     text-align: center; }
 
 .view-switch {
@@ -244,7 +248,8 @@ header {
     max-height: 85vw;
     padding: 5px;
     height: auto;
-    margin: 0; }
+    margin: 0;
+    border-color: #f29d0c; }
   .key-gif p {
     opacity: 0.95;
     position: absolute;
@@ -257,7 +262,8 @@ header {
     margin: 0 auto;
     font-size: 42px; }
   .key-gif:hover img {
-    border: 5px solid #f29d0c; }
+    border-width: 5px;
+    border-style: solid; }
   .key-gif:hover p {
     display: inline-block; }
 
