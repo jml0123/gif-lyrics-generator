@@ -2,7 +2,7 @@
   box-sizing: border-box; }
 
 body {
-  background: #111111;
+  background: #2c2cba;
   margin: 0;
   transition: 250ms ease; }
 
@@ -12,7 +12,6 @@ main {
   align-items: center;
   justify-content: center;
   font-family: "Roboto", sans-serif;
-  background: #2c2cba;
   min-height: 100vh;
   overflow: hidden;
   padding-bottom: 3%; }
@@ -118,8 +117,7 @@ header {
   margin: 12% 0px;
   width: 100%;
   background: rgba(44, 44, 186, 0.66);
-  transition: 450ms ease;
-  border-radius: 8px; }
+  transition: 450ms ease; }
   .console header, .console .search-container {
     padding: 0 0px; }
 
@@ -279,7 +277,8 @@ header {
     cursor: default;
     border: 1px dashed #e6e6e6;
     max-width: 445px;
-    padding: 3.66px; }
+    padding: 3.66px;
+    border-radius: 8px; }
     .console header, .console .search-container {
       padding: 0 17px; }
     .console-wrapper {

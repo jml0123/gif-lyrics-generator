@@ -202,10 +202,10 @@ const searchGif = async (searchTerm) => {
 
     try {
         let response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_KEY}&q=${searchTerm}&offset=${selection}`); // Regular Search
-        //let response = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_KEY}&tag=${searchTerm}`); // Random Search
+        //let response = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${GIPHY_KEY}&tag=${searchTerm}`); // [ALTERNATIVE] Random Search
         const giphy_data = await response.json();
         const gif_url = giphy_data.data[0].images.original.url // Regular Search Query
-        //const gif_url = giphy_data.data.images.original.url; // Random Query
+        //const gif_url = giphy_data.data.images.original.url; // [ALTERNATIVE] Random Query
         return gif_url
     }   
 
@@ -333,7 +333,7 @@ const renderView = async (lyrics) => {
 
 // Function to change colors randomly upon search, based on pre-set themes
 const assignTheme = async (themes) => {
-    const main = document.querySelector("main") // primary
+    const body = document.querySelector("body") // primary
     const lyrics_text = document.querySelector(".lyrics-text") // black or white
     const song_title = document.querySelector(".info-container h1") // secondary
     const song_artist = document.querySelector(".info-container p") // black or white
@@ -350,7 +350,7 @@ const assignTheme = async (themes) => {
     else {
         theme = themes;
     }     
-    main.style.backgroundColor = theme.primary;
+    body.style.backgroundColor = theme.primary;
     song_title.style.color = theme.primary;
     song_title.style['-webkit-text-stroke-color'] = theme.secondary;
     song_artist.style.color = theme.textColor;
