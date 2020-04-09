@@ -8,6 +8,11 @@ I wanted to bring more colors and visuals to lyrics in a scalable way. The web a
 
 ## Screenshots
 
+### GRID VIEW
+![Grid View](/screens/gridView-min.png?raw=true "Grid View")
+
+### LYRICS VIEW
+![Lyrics View](/screens/lyricsView-min.png?raw=true "Lyrics View")
 
 ## How to use: 
 Type in a favorite track to output interactive song lyrics with gifs related to key words in the song.
