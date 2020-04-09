@@ -61,7 +61,7 @@ const COLOR_THEMES = [
     {
         name: "deyoung",
         primary: "rgb(6, 148, 0)",
-        secondary: "rgb(235, 99, 56)",
+        secondary: "rgb(255, 178, 140)",
         textColor: "rgb(11, 11, 11)"
     }, // This neeeds to be rgb format.
 ]
@@ -130,13 +130,24 @@ const parseLyrics = (lyrics_data) => {
     // Create a keywords array
     const keywords = [];
 
+
+    emptyArr= [];
+
     // Parse lyrics using Compromise
-    const verbs = lyrics.verbs().json();
-    const nouns = lyrics.nouns().json();
+    const verbs = lyrics.verbs().not("#Infinitive").not("#Copula").not("#Auxiliary").json();
+    const nouns = lyrics.nouns().not("#Possessive").json();
     const adjectives = lyrics.adjectives().json();
     const acronyms = lyrics.acronyms().json();
     const topics = lyrics.topics().json();
     const adverbs =  lyrics.adverbs().json();
+
+    console.log(verbs);
+    console.log(nouns);
+    console.log(adjectives);
+    console.log(acronyms);
+    console.log(adverbs)
+
+    console.log(keywords);
 
     // Add to keyword list if it's a keyword
     nouns.forEach(noun => { keywords.push(noun.text)})
@@ -145,21 +156,17 @@ const parseLyrics = (lyrics_data) => {
     adverbs.forEach(adverb => {keywords.push(adverb.text)})
     topics.forEach(topic => {keywords.push(topic.text)})
 
-    console.log(lyrics_data)
+    console.log(lyrics.json())
 
-
-    console.log(keywords)
-
-
-
-    // Replace all new lines with line break (<br>), then split all words into an array
+    // Split all words into an array based on space 
     parsedLyrics = lyrics_data.split(/ +?/g);
 
-    console.log(parsedLyrics);
-    // Make the parsed word into an object if it's a keyword with a blank imgSrc
+    // Make the parsed word into an object if it's a keyword
+    // object contains keyword value (i.e. the giphy search value), html value (string with  <br>) and imgSrc
     for (i = 0; i < parsedLyrics.length ; i++) {
-        let htmlString = parsedLyrics[i].replace(/\n/ig, "<br>")
+        let htmlString = parsedLyrics[i].replace(/\r\n|\n|\r/gm, "<br>")
         let matchedWord = parsedLyrics[i].split(/(\r\n|\n|\r)/gm)[0];
+
         if (keywords.includes(matchedWord)) {
             parsedLyrics[i] = 
             {   
@@ -169,6 +176,9 @@ const parseLyrics = (lyrics_data) => {
                 alt: ""
             }
         }
+        else {
+            parsedLyrics[i] = htmlString;
+        }
     }
    console.log(parsedLyrics);       
    
@@ -177,14 +187,12 @@ const parseLyrics = (lyrics_data) => {
 
 const handleTrack = async (song, artist) => {
     setInitialState = true;
-
     render_container.innerHTML = ""; 
     const track = await getLyrics(song, artist);
     const parsed_track = parseLyrics(track);
     GIF_LYRICS = await assignGifs(parsed_track);
 
     renderView(GIF_LYRICS);
-    
 }
 
 
@@ -234,9 +242,10 @@ const lyricsView = async (list_of_words) => {
 
     let gif_lyrics = "";
 
-    // For each word in the lyrics array, if the word is a key word and there is a gif associated with it, render it onto the page, lyrics first
+    // For each word in the lyrics array, if the word is a key word and there is a gif associated with it, render it onto the page
     for (i = 0; i < list_of_words.length; i++) {
         if (typeof list_of_words[i] === "object" && await list_of_words[i].imgSrc != "") {
+            // If the hml value incldues a break, split the string, putting the key word in the span, and the rest outside of it
             if (list_of_words[i].htmlVal.includes("<br>")) {
                 let splitString = list_of_words[i].htmlVal.split(/(?=<br>)/g)
                 console.log(splitString)
