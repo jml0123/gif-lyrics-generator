@@ -1,10 +1,12 @@
 # GIF LYRICS GENERATOR
 A simple web app using with song lyrics, natural language processing, and gifs. 
 
-Uses [GIPHY API](https://developers.giphy.com/), [MusixMatch API](https://developer.musixmatch.com/), and [Compromise](http://compromise.cool/) 
+Uses [GIPHY API](https://developers.giphy.com/), [MusixMatch API](https://developer.musixmatch.com/), and [Compromise](http://compromise.cool/). 
+
+[Live Site](https://miguel-lorenzo.dev/gif-lyrics-generator)
 
 ## Inspiration 
-I wanted to bring more colors and visuals to lyrics in a scalable way. The web app is inspired by the seizeless efforts and diverse talents of creatives.
+I wanted to bring more colors and visuals to lyrics in a scalable way. The web app is inspired by the efforts and diverse talents of creatives.
 
 ## Screenshots
 
