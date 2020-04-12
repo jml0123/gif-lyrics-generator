@@ -234,20 +234,24 @@ header {
         display: inline-block; }
 
 .key-gif {
-  margin: 0 auto;
+  background: #111111;
+  width: 95vw;
+  height: 95vw;
+  margin: 5px auto;
   display: flex;
+  padding: 5px;
   align-items: center;
   justify-content: center;
+  border-color: #f29d0c;
   cursor: pointer; }
   .key-gif img {
-    min-width: 85vw;
-    min-height: 85vw;
-    max-width: 85vw;
-    max-height: 85vw;
-    padding: 5px;
+    display: block;
+    position: relative;
     height: auto;
-    margin: 0;
-    border-color: #f29d0c; }
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0; }
   .key-gif p {
     opacity: 0.95;
     position: absolute;
@@ -259,10 +263,40 @@ header {
     padding: 6px 4px;
     margin: 0 auto;
     font-size: 42px; }
-  .key-gif:hover img {
+  .key-gif:hover {
     border-width: 5px;
     border-style: solid; }
-  .key-gif:hover p {
+    .key-gif:hover p {
+      display: inline-block; }
+
+.banner {
+  z-index: 3;
+  transition: 800ms ease;
+  animation-delay: 1.2s;
+  font-size: 100%;
+  display: flex;
+  transform: translateX(300px);
+  position: fixed;
+  right: 0;
+  top: 120px;
+  opacity: 0.98;
+  height: auto;
+  width: 12vw;
+  min-width: 200px;
+  background: #fcfcfc;
+  justify-content: center;
+  align-items: center;
+  color: #121212;
+  border: 2px solid black;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 2px 2px 30px rgba(12, 12, 12, 0.22); }
+  .banner-text {
+    padding: 5px; }
+    .banner-text--emphasis {
+      font-weight: 900; }
+  .banner img {
+    height: auto;
+    width: 50px;
     display: inline-block; }
 
 @media (min-width: 768px) {
@@ -299,15 +333,22 @@ header {
       width: 50%;
       font-size: 75px; }
 
-  .key-gif img {
-    min-width: 350px;
+  .key-gif {
     min-height: 350px;
-    max-width: 350px;
-    max-height: 350px; }
+    min-width: 350px;
+    width: 350px;
+    height: 350px; }
 
   .view-switch {
     position: absolute;
     right: 50px;
     top: 50px; } }
+@keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 /*# sourceMappingURL=main.css.map */

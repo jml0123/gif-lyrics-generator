@@ -151,7 +151,6 @@ header {
     background: rgba(44, 44, 186, 0.66);
     transition: 450ms ease;
 
-
     header, .search-container {
         padding: 0 0px;
     }
@@ -291,6 +290,8 @@ header {
         z-index: 1;
     }
     p {
+        //animation: blink 600ms 2;
+        //animation-delay: 3s;
         margin: 0;
         padding: 0;
         &:hover {
@@ -303,20 +304,24 @@ header {
 }
 
 .key-gif {
-    margin: 0 auto;
+    background: #111111;
+    width: 95vw;
+    height: 95vw;
+    margin: 5px auto;
     display: flex;
+    padding: 5px;
     align-items: center;
     justify-content: center;
+    border-color: $highlightColor;
     cursor: pointer;
     img {
-        min-width: 85vw;
-        min-height: 85vw;
-        max-width: 85vw;
-        max-height: 85vw;
-        padding: 5px;
+        display: block;
+        position: relative;
         height: auto;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
         margin: 0;
-        border-color: $highlightColor;
   
     }
     p{
@@ -332,10 +337,43 @@ header {
         font-size: $gridFontSize;
     }
     &:hover {
-        img {border-width: 5px;
-             border-style: solid };
+        border-width: 5px;
+        border-style: solid;
         p {display: inline-block;}
 
+    }
+}
+.banner {
+    z-index: 3;
+    transition: 800ms ease;
+    animation-delay: 1.2s;
+    font-size: 100%;
+    display: flex;
+    transform: translateX(300px);
+    position: fixed;
+    right: 0;
+    top: 120px;
+    opacity: 0.98;
+    height: auto;
+    width: 12vw;
+    min-width: 200px;
+    background: #fcfcfc;
+    justify-content: center;
+    align-items:center;
+    color: #121212;
+    border: 2px solid black;
+    font-family: $Roboto;
+    box-shadow: 2px 2px 30px rgba(12, 12, 12, 0.22);
+    &-text {
+        padding: 5px;
+        &--emphasis {
+            font-weight: 900;
+        }
+    }
+    img {
+        height: auto;
+        width: 50px;
+        display: inline-block;
     }
 }
 
@@ -378,12 +416,11 @@ header {
     }
 }
   .key-gif {
-      img {
-        min-width: 350px;
-        min-height: 350px;
-        max-width: 350px;
-        max-height: 350px; 
-      }
+      min-height: 350px;
+      min-width: 350px;
+       width: 350px;
+       height: 350px;
+    
   }
   .view-switch {
     position: absolute;
@@ -391,4 +428,10 @@ header {
     top: 50px;
   }
   
+}
+
+@keyframes blink {
+    0%{opacity: 1}
+    50%{opacity: 0}
+    100%{opacity: 1}
 }
