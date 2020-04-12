@@ -88,7 +88,7 @@ const getLyrics = async (songName, artist) => {
         return lyrics_clean;
     }   
     catch(err){
-        console.error(err);
+        //console.error(err);
         render_container.innerHTML =  
         `<div class="lyrics-text--error">
         Could not find this track. Try another one.<br>
@@ -117,7 +117,7 @@ const getSongTitleArtistName = async (songName, artist) => {
             renderTrackInfo(track_info)
        }
        catch(err){
-            console.error(err, "could not find match");
+            //console.error(err, "could not find match");
             document.querySelector("track-info").innerHTML = 
             `<div class="lyrics-text--error">
             Could not load track info.<br>
@@ -207,8 +207,7 @@ const searchGif = async (searchTerm) => {
     }   
 
     catch(err){
-        console.error(err);
-
+        //console.error(err);
         // Return blank string if no gif exists
         return ""
     }
@@ -391,7 +390,6 @@ const assignTheme = async (themes) => {
     song_title.style['-webkit-text-stroke-color'] = theme.secondary;
     song_artist.style.color = theme.textColor;
     
-    /// console.log(`${theme.name} theme activated...`);
     CURRENT_THEME = theme;
 }
 
